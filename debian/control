@@ -1,0 +1,23 @@
+Source: hpci2sync
+Priority: optional
+Maintainer: Rémi Palancher <remi-externe.palancher@edf.fr>
+Build-Depends:
+ debhelper (>= 8),
+ dh-python,
+ python-all (>= 2.7),
+ python-setuptools
+X-Python-Version: >= 2.7
+Standards-Version: 3.9.3
+Section: devel
+Vcs-Browser: https://github.com/edf-hpc/hpci2sync
+Vcs-Git: https://github.com/edf-hpc/hpci2sync.git
+
+Package: hpci2sync
+Architecture: all
+Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+ ${python:Depends}
+Description: Configuration manager for Icinga2 on HPC clusters
+ This package provides hpci2sync utility. It is a configuration manager for
+ Icinga2 monitoring software in HPC clusters context.

@@ -1,0 +1,2 @@
+conf/*.ini etc/hpci2sync
+templates/* etc/hpci2sync/templates

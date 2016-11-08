@@ -1,0 +1,9 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+%:
+	dh $@ --with python2
+
+clean:
+	dh $@
+	rm -rf *.egg-info
