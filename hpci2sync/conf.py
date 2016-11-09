@@ -110,7 +110,7 @@ class ConfRun(object):
           "icinga2 = /etc/icinga2\n"
           "privatedata = /root/hpc-privatedata\n"
           "ca = /var/lib/icinga2/ca\n"
-          "crtdst = %(privatedata)s/files/${cluster}/icinga2\n"
+          "crtdst = %(privatedata)s/files/${cluster}/icinga2/certs\n"
           "hieradata = %(privatedata)s/hieradata\n"
           "equipments = %(privatedata)s/monitoring/equipments\n"
           "conf = %(privatedata)s/monitoring/conf\n"
