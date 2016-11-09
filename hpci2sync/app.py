@@ -233,6 +233,8 @@ class MainApp(object):
 
         zone_dir = os.path.join(self.conf.dir_conf, zone)
         dst_dir = os.path.join(self.tmpdir.path, zone)
+        if not os.path.exists(dst_dir):
+            os.makedirs(dst_dir)
         zone_files = os.listdir(zone_dir)
         for zone_file in zone_files:
             src_file = os.path.join(zone_dir, zone_file)
@@ -283,6 +285,7 @@ class MainApp(object):
         self._gen_zone_hosts('master', hosts)
         self._gen_zone_zones('master', servers)
         self._copy_zone_conf('master')
+        self._copy_zone_conf('global-templates')
 
     def _sync_conf_cluster(self, cluster):
 
