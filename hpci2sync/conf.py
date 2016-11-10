@@ -66,7 +66,7 @@ class ConfRun(object):
 
         # certs params
         self.exclude_clusters = []
-        self.exclude_roles = []
+        self.nodes_roles = []
 
         # conf params
         self.profs_master = []
@@ -95,7 +95,7 @@ class ConfRun(object):
         logger.debug("- file_hosts: %s", str(self.file_hosts))
         logger.debug("- file_keys: %s", str(self.file_keys))
         logger.debug("- exclude_clusters: %s", str(self.exclude_clusters))
-        logger.debug("- exclude_roles: %s", str(self.exclude_roles))
+        logger.debug("- nodes_roles: %s", str(self.nodes_roles))
         logger.debug("- profs_master: %s", str(self.profs_master))
         logger.debug("- prof_monsat: %s", str(self.prof_monsat))
         logger.debug("- dir_templates: %s", str(self.dir_templates))
@@ -125,7 +125,7 @@ class ConfRun(object):
           "exclude = lowlatency\n"
           "[certs]\n"
           "exclude_clusters = gen\n"
-          "exclude_roles = cn,gn,bm\n"
+          "nodes_roles = cn,gn,bm\n"
           "[conf]\n"
           "profiles_master = virt::host\n"
           "profile_monsat = monitoring::server\n"
@@ -150,7 +150,7 @@ class ConfRun(object):
         self.file_hosts = parser.get('paths', 'hosts')
         self.file_keys = parser.get('paths', 'keys')
         self.exclude_clusters = parser.get('certs', 'exclude_clusters').split(',')
-        self.exclude_roles = parser.get('certs', 'exclude_roles').split(',')
+        self.nodes_roles = parser.get('certs', 'nodes_roles').split(',')
         self.profs_master = parser.get('conf', 'profiles_master').split(',')
         self.prof_monsat = parser.get('conf', 'profile_monsat')
         self.profs_master.append(self.prof_monsat)

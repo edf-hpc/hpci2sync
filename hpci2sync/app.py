@@ -142,7 +142,7 @@ class MainApp(object):
     def _sync_certs_equipment(self, cluster, equipment, dir_crtdst):
 
         if equipment.category != 'server' or \
-           equipment.role in self.conf.exclude_roles:
+           equipment.role in self.conf.nodes_roles:
             logger.debug("skipping equipment %s in certs sync", equipment.name)
             return
 
@@ -294,7 +294,7 @@ class MainApp(object):
         logger.debug("syncing conf for cluster %s", cluster.name)
         for equipment in cluster:
             if equipment.monitored_by_satellite(self.conf.profs_master,
-                                                self.conf.exclude_roles):
+                                                self.conf.nodes_roles):
                 logger.debug("equipment %s is monitored by satellite",
                              equipment.name)
 
