@@ -147,23 +147,23 @@ class MainApp(object):
             return
 
         # original CSR, certificate and key in icinga2 CA directory
-        csr_file = os.path.join(self.conf.dir_ca, equipment.fqdn + '.csr')
-        crt_file = os.path.join(self.conf.dir_ca, equipment.fqdn + '.crt')
-        key_file = os.path.join(self.conf.dir_ca, equipment.fqdn + '.key')
+        csr_file = os.path.join(self.conf.dir_ca, equipment.name + '.csr')
+        crt_file = os.path.join(self.conf.dir_ca, equipment.name + '.crt')
+        key_file = os.path.join(self.conf.dir_ca, equipment.name + '.key')
 
         # copy of certificate and encoded key in privatedata
-        crtdst_file = os.path.join(dir_crtdst, equipment.fqdn + '.crt')
-        keydst_file = os.path.join(dir_crtdst, equipment.fqdn + '.key.enc')
+        crtdst_file = os.path.join(dir_crtdst, equipment.name + '.crt')
+        keydst_file = os.path.join(dir_crtdst, equipment.name + '.key.enc')
 
         logger.debug("checking if %s certificate/key files exist in %s",
                      equipment.name, dir_crtdst)
         if os.path.exists(crtdst_file) and os.path.exists(keydst_file):
-            logger.debug("certificate already exist for %s", equipment.fqdn)
+            logger.debug("certificate already exist for %s", equipment.name)
             return
 
         self.all_certs_ok = False
         logger.info("creating new CSR, certificate and key for %s",
-                    equipment.fqdn)
+                    equipment.name)
         cmd = [ 'icinga2', 'pki', 'new-cert', '--cn', equipment.fqdn,
                 '--csr', csr_file, '--key', key_file ]
         if not self.conf.dryrun:
