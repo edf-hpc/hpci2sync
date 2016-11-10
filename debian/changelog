@@ -1,3 +1,13 @@
+hpci2sync (0.2) calibre9; urgency=medium
+
+  * Look for certs in certs subdir by default
+  * Also copy global-templates conf files from privatedata
+  * Use short hostname for cert/keys filenames
+  * Rename conf parameter exclude_role to nodes_role
+  * Add nodes to cluster zone hosts file
+
+ -- Rémi Palancher <remi-externe.palancher@edf.fr>  Thu, 10 Nov 2016 15:20:22 +0100
+
 hpci2sync (0.1) calibre9; urgency=low
 
   * Initial release
