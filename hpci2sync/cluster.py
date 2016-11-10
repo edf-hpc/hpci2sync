@@ -187,9 +187,8 @@ class Equipment(object):
         return self.wan_connected_only or \
                self.has_profile(profiles)
 
-    def monitored_by_satellite(self, profiles, excluded_roles):
-        return not self.monitored_by_master(profiles) and \
-               self.role not in excluded_roles
+    def monitored_by_satellite(self, profiles):
+        return not self.monitored_by_master(profiles)
 
 
 class NetworksSet(object):

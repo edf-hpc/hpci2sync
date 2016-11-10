@@ -205,14 +205,15 @@ class MainApp(object):
         template = tpl_env.get_template(tpl)
         return template
 
-    def _gen_zone_hosts(self, zone, hosts):
+    def _gen_zone_hosts(self, zone, hosts, nodes=None):
 
         os.makedirs(self._zone_dir(zone))
         hosts_file = os.path.join(self._zone_dir(zone), 'hosts.conf')
         logger.info("generating zone hosts file %s", hosts_file)
 
         tpl = self._load_template('hosts.conf')
-        tpl_vars = { "hosts": hosts }
+        tpl_vars = { "hosts": hosts,
+                     "nodes": nodes }
 
         with open(hosts_file, 'w+') as stream:
             stream.write(tpl.render(tpl_vars))
@@ -291,10 +292,11 @@ class MainApp(object):
 
         hosts = []
         servers = []
+        nodes = []
+
         logger.debug("syncing conf for cluster %s", cluster.name)
         for equipment in cluster:
-            if equipment.monitored_by_satellite(self.conf.profs_master,
-                                                self.conf.nodes_roles):
+            if equipment.monitored_by_satellite(self.conf.profs_master):
                 logger.debug("equipment %s is monitored by satellite",
                              equipment.name)
 
@@ -306,11 +308,14 @@ class MainApp(object):
 
                 equipment.set_attrs()
 
-                hosts.append(equipment)
-                if equipment.category == 'server':
-                    servers.append(equipment)
+                if equipment.role in self.conf.nodes_roles:
+                    nodes.append(equipment)
+                else:
+                    hosts.append(equipment)
+                    if equipment.category == 'server':
+                        servers.append(equipment)
 
-        self._gen_zone_hosts(cluster.name, hosts)
+        self._gen_zone_hosts(cluster.name, hosts, nodes)
         self._gen_zone_zones(cluster.name, servers)
         self._copy_zone_conf(cluster.name)
 
