@@ -34,4 +34,4 @@
 """This module just provides hpci2sync version as used by --version, setup.py
    and Sphinx documentation."""
 
-__version__ = "0.1"
+__version__ = "0.3"

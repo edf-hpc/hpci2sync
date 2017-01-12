@@ -1,3 +1,9 @@
+hpci2sync (0.3) calibre9; urgency=medium
+
+  * Make server ending digit in hostname optional
+
+ -- Rémi Palancher <remi-externe.palancher@edf.fr>  Thu, 12 Jan 2017 09:14:39 +0100
+
 hpci2sync (0.2) calibre9; urgency=medium
 
   * Look for certs in certs subdir by default
