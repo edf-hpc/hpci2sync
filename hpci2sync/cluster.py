@@ -135,7 +135,7 @@ class Equipment(object):
 
     def extract_role(self, prefix):
 
-        match = re.match(r"%s([a-z]+[a-z0-9]*[a-z]+)[0-9]+" % (prefix), self.name)
+        match = re.match(r"%s([a-z]+[a-z0-9]*[a-z]+)[0-9]*" % (prefix), self.name)
         self.role = match.group(1)
         logger.debug("role of %s is %s", self.name, self.role)
 
