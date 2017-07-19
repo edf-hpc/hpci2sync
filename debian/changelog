@@ -1,3 +1,10 @@
+hpci2sync (0.4) calibre9; urgency=medium
+
+  * Log error when server role cannot be extracted
+  * Extract cluster prefix from hieradata
+
+ -- Rémi Palancher <remi-externe.palancher@edf.fr>  Wed, 19 Jul 2017 15:10:51 +0200
+
 hpci2sync (0.3) calibre9; urgency=medium
 
   * Make server ending digit in hostname optional
