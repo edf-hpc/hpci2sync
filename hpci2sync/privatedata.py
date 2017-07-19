@@ -123,6 +123,11 @@ class PrivateData(object):
             equipment = Equipment(host)
             equipment.category = category
             if equipment.category == 'server':
-                equipment.extract_role(cluster.prefix)
+                try:
+                    equipment.extract_role(cluster.prefix)
+                except RuntimeError:
+                    logger.error("unable to extract role from equipement "
+                                 "name %s", equipment.name)
+                    continue  # skip server, continue with next equipment
             equipment.model = params.get('model')
             cluster.equipments.add(equipment)
