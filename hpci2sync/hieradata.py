@@ -153,3 +153,22 @@ class Hieradata(object):
             except yaml.YAMLError as exc:
                 logger.error("error while parsing role file %s: %s",
                              role_file, exc)
+
+    def parse_cluster_prefix(self, cluster):
+
+        logger.debug("parsing prefix for cluster %s", cluster)
+
+        cluster_file = os.path.join(self.path, cluster, self.conf.file_cluster)
+        prefix = None
+
+        with open(cluster_file, 'r') as stream:
+            try:
+                data = yaml.load(stream)
+                prefix = data['cluster_prefix']
+                logger.debug("cluster %s prefix found: %s", cluster, prefix)
+
+            except yaml.YAMLError as exc:
+                logger.error("error while parsing cluster file %s: %s",
+                             cluster_file, exc)
+
+        return prefix

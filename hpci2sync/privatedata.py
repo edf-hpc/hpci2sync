@@ -52,7 +52,8 @@ class PrivateData(object):
         self.hieradata = Hieradata(conf, self.clusters, networks)
 
     def parse(self):
-        # first parse equipments specs then master_network in hieradata
+        # first parse equipments specs then master_network and profiles in
+        # hieradata, respectively to fill netifs and profiles related data.
         self.parse_equipments()
         self.hieradata.parse()
         return self.clusters
@@ -72,7 +73,11 @@ class PrivateData(object):
 
         logger.debug("parsing cluster %s", name)
 
-        cluster = self.clusters.add(name)
+        # Extract cluster prefix from cluster file of hieradata. It cannot be
+        # guessed reliably out of cluster name, no other choice than reading
+        # hieradata here.
+        prefix = self.hieradata.parse_cluster_prefix(name)
+        cluster = self.clusters.add(name, prefix)
 
         glob_eqt_files = os.path.join(self.conf.dir_equipments, name, '*.yaml')
         equipment_files = glob.glob(glob_eqt_files)

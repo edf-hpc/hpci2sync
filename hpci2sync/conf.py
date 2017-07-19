@@ -55,6 +55,7 @@ class ConfRun(object):
         self.dir_equipments = None
         self.dir_conf = None
         self.dir_tmp = None
+        self.file_cluster = None
         self.file_hosts = None
         self.file_keys = None
 
@@ -92,6 +93,7 @@ class ConfRun(object):
         logger.debug("- net_adm: %s", str(self.net_adm))
         logger.debug("- net_wan: %s", str(self.net_wan))
         logger.debug("- net_mgt: %s", str(self.net_mgt))
+        logger.debug("- file_cluster: %s", str(self.file_cluster))
         logger.debug("- file_hosts: %s", str(self.file_hosts))
         logger.debug("- file_keys: %s", str(self.file_keys))
         logger.debug("- exclude_clusters: %s", str(self.exclude_clusters))
@@ -115,6 +117,7 @@ class ConfRun(object):
           "equipments = %(privatedata)s/monitoring/equipments\n"
           "conf = %(privatedata)s/monitoring/conf\n"
           "tmp = /tmp/hpci2sync\n"
+          "cluster = cluster.yaml\n"
           "hosts = network.yaml\n"
           "keys = /etc/hpci2sync/keys.ini\n"
           "[networks]\n"
@@ -147,6 +150,7 @@ class ConfRun(object):
         self.net_mgt = parser.get('networks', 'management')
         self.net_bmc = parser.get('networks', 'bmc')
         self.net_exclude = parser.get('networks', 'exclude').split(',')
+        self.file_cluster = parser.get('paths', 'cluster')
         self.file_hosts = parser.get('paths', 'hosts')
         self.file_keys = parser.get('paths', 'keys')
         self.exclude_clusters = parser.get('certs', 'exclude_clusters').split(',')

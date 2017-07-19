@@ -44,16 +44,16 @@ class ClustersSet(object):
 
     def __contains__(self, cluster_name):
 
-        return Cluster(cluster_name) in self._clusters
+        return Cluster(cluster_name, None) in self._clusters
 
     def __iter__(self):
 
         for cluster in self._clusters:
             yield cluster
 
-    def add(self, name):
+    def add(self, name, prefix):
 
-        new_cluster = Cluster(name)
+        new_cluster = Cluster(name, prefix)
         self._clusters.add(new_cluster)
         return new_cluster
 
@@ -66,9 +66,10 @@ class ClustersSet(object):
 
 class Cluster(object):
 
-    def __init__(self, name):
+    def __init__(self, name, prefix):
 
         self.name = name
+        self.prefix = prefix
         self.equipments = set()
 
     def __eq__(self, other):
@@ -87,10 +88,6 @@ class Cluster(object):
 
         for equipment in sorted(self.equipments, key=lambda equipment: equipment.name):
             yield equipment
-
-    @property
-    def prefix(self):
-        return self.name[:2]
 
     def get_equipment(self, name):
         for equipment in self.equipments:
